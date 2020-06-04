@@ -26,7 +26,7 @@ const bucketName = 'ENTER BUCKET NAME HERE';
 5. Install node and npm.
 6. Execute `npm install`.
 7. Execute `npm install -g electron-packager`.
-8. launch the UI from the terminal by command `npm start`.
+8. Launch the UI from the terminal by command `npm start`.
 9. For making Linux (Ubuntu), MACOS and Windows executable, run the following commands.
 ```bash
 // For MACOS (tested on MACOS Mojave)
@@ -37,6 +37,12 @@ electron-packager . --overwrite --platform=linux --arch=x64 --icon=./Images/icon
 
 // For Windows (tested on Windows 10)
 electron-packager . form-recognizer --overwrite --platform=win32 --arch=x64 --icon=./Images/icon.ico --prune=true --out=../release-win
+```
+
+**We have used `python3` for development as `python2.7` has been deprecated. There might be an issue on some systems because in some systems `python3` is called `python` and in some systems it is `python3`.** If the code isn't working and showing `ENOENT` error, then do the following in `renderer.js` file.
+```javascript
+/* if python3 doesn't work, then replace it with python */
+var pythonProcess = spawn('python3',[p, '-i', directory]);
 ```
 
 ## For Linux SetUp 
