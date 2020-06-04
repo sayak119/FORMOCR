@@ -45,7 +45,7 @@ electron-packager . form-recognizer --overwrite --platform=win32 --arch=x64 --ic
 var pythonProcess = spawn('python3',[p, '-i', directory]);
 ```
 
-## For Linux SetUp 
+## For Linux Setup 
 1. Install python and pip using the link : `https://docs.python-guide.org/starting/install3/linux/`.
 2. After installation test command `python` and `pip` by in command prompt.
 3. In command prompt change directory to package folder.
@@ -57,7 +57,7 @@ var pythonProcess = spawn('python3',[p, '-i', directory]);
 3. After installation test command `python` and `pip` by in command prompt.
 4. Run `pip install -r requirment.txt`.
 
-## For Mac SetUp 
+## For MACOS Setup 
 1. Install python  and pip using the link : `https://docs.python-guide.org/starting/install3/osx/`.
 2. After installation test command `python` and `pip` by in command prompt.
 3. In command prompt change directory to package folder.
