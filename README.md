@@ -1,7 +1,7 @@
 
 # FORMOCR
 
-This is a submission for Exact Sciences OCR Hackathon. This code is the source code which can be packaged as linux, MACOS and Windows executable.
+This is a submission for Exact Sciences OCR Hackathon. This code is the source code which can be packaged as Linux (Ubuntu), MACOS and Windows executable.
 
 ## Initial step
 1. Create an account on `Google Cloud`.
@@ -45,7 +45,7 @@ electron-packager . form-recognizer --overwrite --platform=win32 --arch=x64 --ic
 var pythonProcess = spawn('python3',[p, '-i', directory]);
 ```
 
-## For Linux Setup 
+## For Ubuntu Setup 
 1. Install python and pip using the link : `https://docs.python-guide.org/starting/install3/linux/`.
 2. After installation test command `python` and `pip` by in command prompt.
 3. In command prompt change directory to package folder.
