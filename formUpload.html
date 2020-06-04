@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+<!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  -->  <link rel="stylesheet" href="./style.css" />
+  		<link rel="stylesheet" href="./bootstrap.css" />
+    <title>Form Recognizer</title>
+  </head>
+ <body>
+ 	<div class="marginspace" style="padding-top: 30px;">
+    <p class="h1 marginspace " style="text-align: center;">Form Recognizer</p>
+ </div>
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+<!--    <script src="./index.js"></script> -->
+  </body>
+<body>
+
+<div align="right"><BUTTON id="qc" onClick="openQC()" background-color="red" width="50px" class="btn btn-primary marginspace">&nbsp;Quality Check&nbsp;</BUTTON></div>
+	<!--
+	<table width="100%" border = "1" cellpadding = "5" cellspacing = "5" style="text-align: justify;">
+	<tr>
+		<th class="row column-left">
+			All Forms
+		</th>
+		<th class="row column-centre"> Selected Image	
+		</th>
+		<th class="row column-right">
+			Output Json Data
+                </th>
+	</tr>
+	<table> -->
+
+
+
+<table width="95%" align="centre" class="marginspace" cellpadding = "5" cellspacing = "5" style="text-align: justify;float: right;">
+<tr> <th>
+	
+</th>
+	<th class="rowSelf">
+			Output from Console
+		</th>
+</tr>
+<tr class="rowSelf" height= "600px">
+<td>
+	<div >
+		<Form enctype="multipart/form-data">
+			<div class="marginspace inputLabel">
+    			<div><label for="inputImage"><b>
+      			Choose file to Upload :</b>
+    			</label>
+    			</div>
+    			<div>
+    			<input type="file" id="inputImage" onchange="setUploadedDirectoryPath(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple class="btn btn-light" value="Choose Folder"/>
+      			
+      			</div>
+			</div>
+			<div class="marginspace form-group">
+			<div>
+    		<label><b>
+   			Select Form Type 
+    		</b></label>
+    		</div>
+    		<div>
+    		<select id="FormType" class="form-control">
+			<option value="Form1">Form1</option>
+			<option value="Form2">Form2</option>     
+   			</select>
+   			<input type="hidden" id="directoryFilePath" value="">
+   			</div></div>
+
+			
+		</Form>
+	</div>
+
+		<div class="marginspace"><button class="btn btn-info" onClick = "runPython()">Submit</button></div>
+	
+</td>
+	
+		<td width= "80%" style="background-color:black;">
+	<div id="consoleOutput" style="overflow-y: scroll; scroll-behavior: auto;color:white; max-height: 600px;"></div>
+		<!-- <input type="textarea" id="consoleOutput" class="scrolling" style="overflow-y: scroll; scroll-behavior: auto;" value="" width="100%" height="400px"> -->
+			<!-- Codes by HTMLcodes.ws -->
+	<!--		<marquee behavior="scroll" id="consoleOutput" direction="down"></marquee> -->
+
+		</td>
+	</tr>
+</table>
+		<!--
+      <div class="row column-left scrolling colrBack" >
+        <h2>All Forms</h2>
+	<div id="display-files">
+      	</div>
+      </div>
+      <div class="row column-centre">
+        <h2>Selected Image</h2>
+        <div id="displaySelected">
+        </div>
+      </div>
+      <div class="row column-right">
+        <h2>Json Data</h2>
+        <p>Some text..</p>
+      </div>
+-->
+ 
+	<!-- Insert this line above script imports  -->
+   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+	<!-- normal script imports etc  -->
+ 
+	<!-- Insert this line after script imports -->
+	<script>if (window.module) module = window.module;</script>
+	<script type="text/javascript">
+   	<!-- insert the js scripts -->
+	</script>
+</body> 
+</html>

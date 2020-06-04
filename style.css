@@ -1,0 +1,94 @@
+h1 {
+    text-align: center;
+    color: blueviolet;
+}
+
+
+* {
+   box-sizing: border-box;
+  }
+  
+
+  .scrolling {
+    height: 100%;
+    overflow: auto;
+    max-height: 1000px;
+  }
+
+  .colrBack{
+    background-color:#bbb;
+
+  }
+  /* Create two equal columns that floats next to each other */
+  .column-left {
+    float: left;
+    width: 20%;
+    padding: 10px;
+     /* Should be removed. Only for demonstration */
+    text-align: center;
+  }
+ .column-centre {
+    float: left;
+    width: 40%;
+    padding: 10px;
+    /* Should be removed. Only for demonstration */
+    text-align: center;
+  }
+ .column-right {
+    float: left;
+    width: 40%;
+    padding: 10px;
+    text-align: center;
+    /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .rowSelf:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.displayFullImg{
+}
+
+.inputLabel{
+
+}
+
+.listStyle{
+  list-style: none;
+  padding-left: 0px;
+}
+.thumb{
+  padding-top: 20px
+}
+.equalHeight{
+  min-height: 1000px;
+}
+
+.setMargin{
+  margin-bottom: 10px;
+  text-align: right;
+}
+.buttonClass{
+  position: absolute;
+}
+.submitButton{
+  background-color:#68a964;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:22%;
+  margin-bottom:0%
+}
+
+.marginspace{
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px
+  margin-top: 10px;
+  margin-right: 20px;
+}
+.boxed {
+  border: 2px solid blue ;
+}

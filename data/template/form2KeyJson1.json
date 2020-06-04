@@ -1,0 +1,137 @@
+{
+  "data": [
+    {
+      "Key": "ColoOrderNumber",
+      "yMin" : 0,
+      "yMax" : 0.04,
+      "order": 1,
+      "value":""
+    },
+    {
+      "Key": "dateRecievedByESLab",
+      "yMin" : 0.04,
+      "yMax" : 0.08,
+      "order": 2,
+      "value": ""
+    },
+    {
+      "Key": "healthOrganizationName",
+      "yMin" : 0.08,
+      "yMax" : 0.12,
+      "order": 3,
+      "value": ""
+    },
+    {   
+      "Key": "providerName",
+      "yMin" : 0.12,
+      "yMax" : 0.16,
+      "order": 4,
+      "value": ""
+    },
+    {   
+      "Key": "providerNPI",
+      "yMin" : 0.16,
+      "yMax" : 0.20,
+      "order": 5,
+      "value": ""
+    },
+    {   
+      "Key": "ICD-10",
+      "yMin" : 0.20,
+      "yMax" : 0.34,
+      "order": 6,
+      "value": ""
+    },
+    {   
+      "Key": "patientName",
+      "yMin" : 0.34,
+      "yMax" : 0.38,
+      "order": 7,
+      "value": ""
+    },
+    {   
+      "Key": "DateOfBirth",
+      "yMin" : 0.38,
+      "yMax" : 0.42,
+      "order": 8,
+      "value": ""
+    },
+    {   
+      "Key": "patientSex",
+      "yMin" : 0.42,
+      "yMax" : 0.46,
+      "order": 9,
+      "value": ""
+    },
+    {   
+      "Key": "patientPhoneNumber",
+      "yMin" : 0.46,
+      "yMax" : 0.50,
+      "order": 10,
+      "value": ""
+    },
+    {   
+      "Key": "ShippingAddress",
+      "yMin" : 0.50,
+      "yMax" : 0.54,
+      "order": 11,
+      "value": ""
+    },
+    {   
+      "Key": "secureFaxNumber",
+      "yMin" : 0.54,
+      "yMax" : 0.60,
+      "order": 12,
+      "value": ""
+    },
+    {   
+      "Key": "healthcareProviderSign",
+      "yMin" : 0.60,
+      "yMax" : 0.66,
+      "order": 13,
+      "value": ""
+    },
+    {   
+      "Key": "insuranceType",
+      "yMin" : 0.66,
+      "yMax" : 0.72,
+      "order": 14,
+      "value": ""
+    },
+    {   
+      "Key": "insuranceCarrierName",
+      "yMin" : 0.72,
+      "yMax" : 0.78,
+      "order": 15,
+      "value": ""
+    },
+    {   
+      "Key": "subscriberId",
+      "yMin" : 0.78,
+      "yMax" : 0.82,
+      "order": 16,
+      "value": ""
+    },
+    {   
+      "Key": "GroupNumber",
+      "yMin" : 0.82,
+      "yMax" : 0.86,
+      "order": 17,
+      "value": ""
+    },
+    {   
+      "Key": "PolicyHolderName",
+      "yMin" : 0.86,
+      "yMax" : 0.92,
+      "order": 18,
+      "value": ""
+    },    
+    {   
+      "Key": "PolicyHolderDOB",
+      "yMin" : 0.92,
+      "yMax" : 1,
+      "order": 19,
+      "value": ""
+    }
+  ]
+}

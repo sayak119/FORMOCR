@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./bootstrap.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+	<title>Form Recognizer</title>
+  </head>
+ <body>
+    	<div class="marginspace" style="padding-top: 30px;">
+    <p class="h1 marginspace " style="text-align: center;">Form Recognizer</p>
+ 	</div>
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+    <script src="./googleCloudStorage.js"></script>
+<!--    <script src="./index.js"></script> -->
+  </body>
+<body>
+	<div align="right"><BUTTON id="uploadImages" onClick="openUploadImage()" background-color="red" width="50px" class="btn btn-primary marginspace">&nbsp;Process Files&nbsp;</BUTTON></div>
+	<div class="marginspace" style="padding-top: 10px;">
+	<div align="centre" class="marginspace">
+		<!-- <BUTTON id="selectDirectory" onClick="selectDirectory()" background-color="red" width="50px" class="marginspace">&nbsp;Select Input Directory&nbsp;</BUTTON> -->
+		<div class="marginspace form-group">
+		<label><b>Input Directory Path : </b>&nbsp;</label>
+		<input id="selectedDirectory" class="form-control" type="textbox" width="80px" value=""/> 
+		</div>
+		<div>
+		<div style="padding-left:20px;">&nbsp;<b> OR </b>&nbsp;</div>
+		<input type="file" id="flup" onchange="setDirectoryPath(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple value="Choose Folder" class="btn btn-light"/>
+		<div align="center">
+		<BUTTON id="selectDirectory" onClick="selectDirectory()" background-color="red" width="50px" align="center" class="btn btn-info">&nbsp;Submit&nbsp;</BUTTON>
+		</div>
+		</div>
+	</div>
+	</div>
+
+	
+	<div id="dataTable" style="display:none; padding-top: 20px;">
+	<table width="100%" cellpadding = "5" cellspacing = "5" style="text-align: justify;">
+	<tr>
+		<th class="rowSelf column-left card-header">
+			All Forms
+		</th>
+		<th class="rowSelf column-centre card-header"> Selected Image	
+		</th>
+		<th class="rowSelf column-right card-header">
+			Output Json Data
+                </th>
+	</tr>
+	<tr class="rowSelf" height= "70%">
+	
+		<td class="column-left scrolling equalHeight">
+			<ul class="listStyle">
+			<div id="display-files">
+        		</div>
+        	</ul>
+		</td>
+		
+		<td class="column-centre equalHeight">
+			<div id="displaySelected">
+        		</div>
+		</td>
+		<td class="column-right equalHeight">
+			<div style="display: none" class="marginspace" id="QCdivShow"><Label><b>QC Status : &nbsp;</b></Label><div id="QCinfo" class="btn btn-outline-danger"></div></div>
+			<form id="jsonData">
+			<div id="displayJson">
+
+			   <!-- <div><label></label>>
+				<input type="textbox"/>
+				</div> -->
+			</div>
+			</form>
+			<input type="hidden" id="imageFilePath" value="">
+			<input type="hidden" id="JsonFilePath" value="">
+			<div style="align-items: center;">
+				<button id="submitButton" onClick="saveQCJson()" style="display:none;" class="submitButton btn btn-info"><b>Submit Data</b></button>
+			</div>
+	<!--	</form> -->
+		</td>
+	</tr>
+	</table>
+</div>
+	
+
+<!--
+      <div class="row column-left scrolling colrBack" >
+        <h2>All Forms</h2>
+	<div id="display-files">
+      	</div>
+      </div>
+      <div class="row column-centre">
+        <h2>Selected Image</h2>
+        <div id="displaySelected">
+        </div>
+      </div>
+      <div class="row column-right">
+        <h2>Json Data</h2>
+        <p>Some text..</p>
+      </div>
+-->
+ 
+	<!-- Insert this line above script imports  -->
+   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+	<!-- normal script imports etc  -->
+ 
+	<!-- Insert this line after script imports -->
+	<script>if (window.module) module = window.module;</script>
+	<script type="text/javascript">
+   
+  // 	readGivenDirectory();
+	</script>
+</body> 
+</html>
