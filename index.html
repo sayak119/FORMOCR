@@ -15,7 +15,7 @@
  	</div>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
-    <script src="./googleCloudStorage.js"></script>
+   
 <!--    <script src="./index.js"></script> -->
   </body>
 <body>
@@ -76,7 +76,7 @@
 			<input type="hidden" id="imageFilePath" value="">
 			<input type="hidden" id="JsonFilePath" value="">
 			<div style="align-items: center;">
-				<button id="submitButton" onClick="saveQCJson()" style="display:none;" class="submitButton btn btn-info"><b>Submit Data</b></button>
+				<button id="submitButton" onClick="saveQCJson('QCComplete-UploadPending', 1)" style="display:none;" class="submitButton btn btn-info"><b>Submit Data</b></button>
 			</div>
 	<!--	</form> -->
 		</td>
@@ -101,7 +101,6 @@
         <p>Some text..</p>
       </div>
 -->
- 
 	<!-- Insert this line above script imports  -->
    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 	<!-- normal script imports etc  -->
@@ -112,5 +111,6 @@
    
   // 	readGivenDirectory();
 	</script>
+	<script src="./googleCloudStorage.js"></script>
 </body> 
 </html>

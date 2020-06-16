@@ -23,6 +23,8 @@ fs.readdir(directoryPath, function (err, files) {
     }
     document.getElementById("dataTable").style.display="block";
     document.getElementById("display-files").innerHTML = '';
+    document.getElementById("displaySelected").innerHTML = '';
+    //document.getElementById("QCdivShow").innerHTML = '';
     //listing all files using forEach
     for(var i=0; i<files.length; i++) {
     	var file 		= files[i];
@@ -83,8 +85,10 @@ function displayJsonData(jsonFileName){
 	document.getElementById("submitButton").style.display = "block";
 	document.getElementById("displayJson").innerHTML = '';
 	var QCState = "Incomplete";
-	if(isQC){
-		QCState = "Completed";
+	if(isQC == "QCComplete-UploadPending"){
+		QCState = "QCComplete-UploadPending";
+	}else if (isQC == "Completed"){
+			QCState = "Completed";
 	}
 	updateQCInfo(QCState);
 
@@ -94,9 +98,14 @@ function displayJsonData(jsonFileName){
 
     	var tableKey = table.Key;
     	var tableValue = table.value;
-
-    	document.getElementById("displayJson").innerHTML += '<div class="setMargin"><label class="inputLabel"><b>'+tableKey+': </b>&nbsp;</label><input id="'+tableKey+'" type="textbox" size="40" value="'+tableValue+'"></div>';
+        
+        if(tableKey == "formType") {
+        	document.getElementById("displayJson").innerHTML += '<div class="setMargin"></label><input id="'+tableKey+'" type="hidden" size="40" value="'+tableValue+'"></div>';
+        }else{
+    		document.getElementById("displayJson").innerHTML += '<div class="setMargin"><label class="inputLabel"><b>'+tableKey+': </b>&nbsp;</label><input id="'+tableKey+'" type="textbox" size="40" value="'+tableValue+'"></div>';
+		}
 	}
+	
 	
 }
 function updateQCInfo(QCState){
@@ -129,21 +138,20 @@ function getFileData(fileName){
 }
 
 function runPython(){
+	//var FormType = '';
 	const spawn = require("child_process").spawn;
 	var directory = document.getElementById("directoryFilePath").value;
-	console.log(directory);
+    var FormType = document.getElementById("FormType").value;
+    if(FormType){
 	const p = path.join(__dirname, "pythonForm", "main.py")
 	
 	try{
-		var pythonProcess = spawn('python3',[p, '-i', directory]);
+		var pythonProcess = spawn('python3',[p, '-i', directory, '-t', FormType]);
 	
 		console.log(pythonProcess);
 
 		pythonProcess.stdout.on('data', (data) => {
-			//console.log(data.toString());
 			document.getElementById('consoleOutput').innerHTML += '<p>'+data.toString()+'</p>';
-			//document.getElementById('consoleOutput').value += '<p>'+data.toString()+'</p>';
-			// Do something with the data returned from python script
 		});
 
 		pythonProcess.on('error', function(err) {
@@ -151,7 +159,7 @@ function runPython(){
 		});
 	}catch(err){
 		alert("Exception: Occured Executing python "+err)
-	}
+	}}
 }
 
 function openQC(){
@@ -175,15 +183,11 @@ function selectDirectory(){
 }
 
 function setDirectoryPath(e){
-//	console.log(e);
 	var directoryPath = getUploadDirectoryPath(e);
 	
     console.log(directoryPath);
-   // var Folder = path.split("/")
-  // console.log(webkitRelativePath);
     
     document.getElementById('selectedDirectory').value = directoryPath;
-	//var path = files[0].webkitRelativePath;
 }
 
 function getUploadDirectoryPath(e){
@@ -197,9 +201,10 @@ function setUploadedDirectoryPath(e){
 	document.getElementById("directoryFilePath").value = getUploadDirectoryPath(e);
 }
 
-function saveQCJson(){
+function saveQCJson(status, count){
 
 	var formElement = document.getElementById("jsonData").elements;
+	var formType= "Form 2";
 	//console.log(formElement);
 	var outJson = new Array();
 	for(var i = 0 ; i < formElement.length ; i++){
@@ -209,43 +214,49 @@ function saveQCJson(){
 		itemObj.value = item.value;
 		//console.log(item);
 		outJson[i] = itemObj; 
-        //outJson[item.id] = item.value;
+		if(itemObj.Key=="formType"){
+			formType = itemObj.value;
+		}
 	}
 	var obj = new Object();
-	//console.log(outJson);
 	obj.data = outJson;//JSON.stringify(outJson);
-	obj.qcComplete = "True";
-	//obj["data"] = outJson;
-	//obj["qcComplete"] = "True";
-	//var output = JSON.encode(outJson)
-	//var obj["data"]= outJson;
-
-	//console.log(obj);
-	//console.log(JSON.stringify(outJson));
+	obj.qcComplete = status; //"QCComplete-UploadPending";
 	var objString = JSON.stringify(obj);
 	//console.log(objString);
 	
 
-	saveLocally(objString);
+	saveLocally(objString, formType, count);
 	//var filetype = ''
 	
 }
-function saveLocally(obj){
+function saveLocally(obj, formType, count){
 	var files = getFilesPath();
 	var imageFilePath = files["imageFilePath"];
 	var jsonFilePath = files["jsonFilePath"];
-	//var x = document.getElementById("displaySelected").innerHTML;
 
-	//var fileUrl = x.src;
-	//console.log(fileUrl);
-	//const fs = require('fs');
+	try { fs.writeFileSync(jsonFilePath, obj, 'utf-8'); }
+	catch(e) { alert('Failed to save the file !'); }
 
-try { fs.writeFileSync(jsonFilePath, obj, 'utf-8'); }
-catch(e) { alert('Failed to save the file !'); }
-fileUploadGoogle(jsonFilePath, "jsonFilePath");
-fileUploadGoogle(imageFilePath, "imageFilePath");
-updateQCInfo("Completed");
-alert("Files uploaded on Google Cloud");
+	if(count == 1){
+
+	var json = { "path": jsonFilePath, "type": "jsonFilePath" , "formType": formType};
+	var img = { "path": imageFilePath, "type": "imageFilePath", "formType": formType };
+	var infoSet = [json, img];
+	fileUploadGoogle(infoSet);
+	}
+
+
+}
+
+function removeQCJsonFile(path) {
+	try {
+		if (fs.existsSync(path)) {
+			fs.unlink(path, function (err) {});
+		}
+	}
+	catch (err) {
+		console.log(err)
+	}
 }
 
 
@@ -260,17 +271,13 @@ function getFilesPath(){
 
 }
 function createSubdirectory(directoryPath){
-	//var fs = require('fs');
-	//var dir = './tmp';
 	var folderPath = directoryPath+'/'+processedFolder;
 
 	if (!fs.existsSync(folderPath)){
 		fs.mkdirSync(folderPath);
 	}
-	//const processedFolder = 
 }
 function isAlignedFile(fileName){
-	//var str = "Hello world, welcome to the universe.";
    var n = fileName.includes("_aligned");
    return n;
 }

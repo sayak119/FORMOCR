@@ -1,30 +1,45 @@
 
+
 const {Storage} 	= require('@google-cloud/storage');
 var keypath 		= path.join(__dirname,'visionKey.json');
+var credentialPath 	= path.join(__dirname,'credentials.json');
 const storage 		= new Storage({keyFilename: keypath});
-//const bucketName    = 'form2bucket';
-const bucketName    = 'sigma-comfort';
+
+var data = fs.readFileSync(credentialPath,'utf8');
+var parsedData = JSON.parse(data);
+const bucketName = parsedData['googleBucket'];
 const bucket 		= storage.bucket(bucketName);
 
 
-function fileUploadGoogle(filePath, fileType){ 
-	var currDate 	= new Date();
-	var month 		= currDate.getMonth()+1;
-	var dateFormat 	= currDate.getFullYear()+'_'+month+'_'+currDate.getDate();
-	var filename 	= path.parse(filePath).base;
-	
-	const options = {
-		destination : fileType+'/'+dateFormat+'/'+filename
-	};
+async function fileUploadGoogle(files) {
 
-	bucket.upload(filePath, options, function(err, file, apiResponse) {
-	if(err){
-		alert("File Could not be saved on Google Cloud.");
-		return false;
+	var uploaded = 0;
+	for (i = 0; i < files.length; i++) {
+		var file = files[i];
+
+		var currDate = new Date();
+		var month = currDate.getMonth() + 1;
+		var dateFormat = currDate.getFullYear() + '_' + month + '_' + currDate.getDate();
+		var filename = path.parse(file.path).base;
+
+		const options = {
+			destination: file.formType + '/' + file.type + '/' + dateFormat + '/' + filename
+		};
+
+		try{
+			var response = await bucket.upload(file.path, options);
+			uploaded++;
+		}
+		catch{
+			alert("Failed to upload file to Google Storage. Please check the Key/Internet Connection");
+			break;
+		}
 	}
-	
-	return true;
-	  // - "image.png" (with the contents of `/local/path/image.png')
-	  // `file` is an instance of a File object that refers to your new file.
-	}); 
+	if(uploaded == files.length){
+		alert("File uploaded successfully to Google Storage");
+		updateQCInfo("Completed");
+		saveQCJson("Completed", 0);
+	}else{
+		updateQCInfo("QCComplete-UploadPending",0);
+	}
 }

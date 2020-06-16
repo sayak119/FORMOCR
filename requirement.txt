@@ -1,5 +1,5 @@
 google-api-core==1.17.0
-google-cloud-vision==1.0.0
 numpy==1.18.4
 opencv-python==4.2.0.34
 grpcio===1.29.0
+pdf2image

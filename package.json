@@ -1,7 +1,7 @@
 {
   "name": "formocr",
   "version": "1.0.0",
-  "description": "Extract text from forms",
+  "description": "File Recognizer",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

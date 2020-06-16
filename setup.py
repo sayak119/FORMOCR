@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
    name='pythonForm',
    version='1.0',
-   description='A module to extract key value from form',
+   description='A module to extrat key value from form',
    author='Sayak Kundu',
    author_email='sk.sayakkundu1997@gmail.com',
    packages=['pythonForm'],  #same as name
