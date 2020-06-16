@@ -23,12 +23,12 @@ const bucketName = 'ENTER BUCKET NAME HERE';
 11. Create an account which maybe trial or full-time subscription.
 12. As mentioned above, the flexibility of the Azure Form Recogniser system is one of the reason why we chose this. Ypu can [label](https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/quickstarts/label-tool) and create your own dataset which we did for **50** handwritten forms.
 13. Create your own `resource group` as mentioned in the Azure Form Recogniser docs.
-13. **NOTE - This step is only necessary if you want to retrain the whole system again with a lot more images. Also, adding large number of images, after a certain point won't increase the performance much.** You'll have to setup 2 containers. One for `form-1` and one for `form-2` and label them accordingly.
-14. Train as given in the doc [here](https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/quickstarts/label-tool) for each form type and save the **Model ID**.
-15. Under your `form recogniser` resource, go to **Pricing Tier** and change it to `Standard`.
-16. Under your `form recogniser` resource, go to **Overview** to get `Resource Group`, `Endpoint` and `Location`. The `Location` can be mapped to `Region` [here](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api/operations/AnalyzeWithCustomModel). For example, in `eastus.api.cognitive.microsoft.com` the region is `eastus`.
-17. Under your `form recogniser` resource, go to **Keys and Endpoint** to get the `Subscription Key`. **Key-1** is used by default.
-18. Create a file named `credentials.json` which has the following content.
+14. **NOTE - This step is only necessary if you want to retrain the whole system again with a lot more images. Also, adding large number of images, after a certain point won't increase the performance much.** You'll have to setup 2 containers. One for `form-1` and one for `form-2` and label them accordingly.
+15. Train as given in the doc [here](https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/quickstarts/label-tool) for each form type and save the **Model ID**.
+16. Under your `form recogniser` resource, go to **Pricing Tier** and change it to `Standard`.
+17. Under your `form recogniser` resource, go to **Overview** to get `Resource Group`, `Endpoint` and `Location`. The `Location` can be mapped to `Region` [here](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api/operations/AnalyzeWithCustomModel). For example, in `eastus.api.cognitive.microsoft.com` the region is `eastus`.
+18. Under your `form recogniser` resource, go to **Keys and Endpoint** to get the `Subscription Key`. **Key-1** is used by default.
+19. Create a file named `credentials.json` which has the following content.
 ```json
 {
 	"azure_region":"region",
@@ -41,7 +41,7 @@ const bucketName = 'ENTER BUCKET NAME HERE';
 
 }
 ```
-19. Once the keys are changed, new executables need to be generated again or build from the source for the code to work.
+20. Once the keys are changed, new executables need to be generated again or build from the source for the code to work.
 
 ## Starting the Project from The Source Code
 1. Install python and Pip  based on the platform - mac/linux/windows.
