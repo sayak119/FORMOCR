@@ -25,6 +25,8 @@ This is a submission for Exact Sciences OCR Hackathon. This code is the source c
 * Need for a **smooth**, **simple** and an **intuitive** user interface.
 
 ## Approach
+Our approach to the whole solution was based on proper research and tests.
+### APIs
 * We tested out with the following APIs first-
     1. Google Vision
     2. Amazon Rekognition
@@ -72,8 +74,40 @@ This is a submission for Exact Sciences OCR Hackathon. This code is the source c
     2. Google Cloud Storage
     3. Microsoft Azure Storage
 * We then tested these 3 options as per our need. The results are as follows-
-    
-
+    1. AWS S3
+        * Pros
+            1. High uptime.
+            2. Highly scalable.
+        * Cons
+            1. Complex to setup.
+        * Comment
+            * AWS S3 is highly scalable but a bit difficult to setup and is costlier than the other 2 options that are available.
+    2. Microsoft Azure Storage
+        * Pros
+            1. High uptime.
+            2. Highly scalable.
+        * Cons
+            1. Asia-Pacific (APAC) region faces bottlenecks and outages.
+        * Comment
+            * Cost analysis of the pricing tiers shows that it has the best price to performance ratio but is unreliable due to infrastructure bottlenecks.
+    3. Google Cloud Storage
+        * Pros
+            1. High uptime
+            2. Cheaper than AWS S3. A same solution or plan as compared to AWS will cost you around 35% cheaper.
+            3. Uploading files in Google Cloud Storage is 5 to 15 times faster than AWS S3.
+            4. Highly scalable.
+        * Cons
+            1. A bit costlier than Microsoft Azure Storage.
+        * Comment
+            * Cost analysis, uptime, speed and scalability made Google Cloud Storage the ideal candidate for storage of images and the output.
+* We went with Google Cloud Storage for the above-mentioned reasons.
+* We are storing the the modified images and saving the data of the form as a `JSON`. By modified, we mean aligned to a certain extent.
+* We chose `JSON` because of the fact that it can be accessed by an API for further analysis and is very easy to understand.
+* In the Google Cloud Storage bucket, the file system is as follows `<bucket-name>/form-1/imageFilePath/YYYY_MM_DD` for images and `<bucket-name>/form-1/jsonFilePath/YYYY_MM_DD` for `JSON` and similarly for form-2.
+* We have the APIs and our custom code for the forms. Now we need a UI.
+### User Interface
+* We wanted that the user interface should not have a steep learning curve and should be very easy to use.
+* For this, we 
 
 ## Initial steps
 1. Create an account on `Google Cloud`.
