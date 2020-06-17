@@ -32,7 +32,7 @@ Our approach to the whole solution was based on proper research and tests.
     2. Amazon Rekognition
     3. Microsoft Computer Vision
 * The main issue we faced was the sensitivity of these APIs for the proper position. using these APIs in their raw format yielded good but not upto the mark result.
-* Our solution - Use custom de-skewing method along with border detection and key points detection form both Form-1 and Form-2.
+* Our solution - Use **custom** de-skewing method along with border detection and key points detection form both Form-1 and Form-2.
 * This increased the accuracy of **Form-2** but we still lacked proper output from **Form-1**.
 * On rigorous testing, we found that if due to some reason, the boundaries are blurred or not in the image, **Form-2**'s performnace deteriorates too to a certain extent. This might be an issue for some forms.
 * Until now, **Google Vision** worked best followed closely by **Microsoft Computer Vision** and then **Amazon Rekognition**.
@@ -112,12 +112,47 @@ Our approach to the whole solution was based on proper research and tests.
 * We had 2 options. They are as follows-
     1. Build a Web application
         * Pros
+            1. Can be used across browsers and systems.
+            2. No installation needed.
         * Cons
+            1. Hosting is required and hence extra cost is incurred.
+            2. Needs to setup security measures for in-house access only.
+            3. Needs to upload all the images to server first and then run it remotely.
         * Comment
+            * Easier to implement but has drawbacks for cost as a business should be able to save money in anyway it can.
     2. Build a Desktop application
         * Pros
+            1. No need for hosting.
+            2. Using certain tools, it can be made cross-platform.
+            3. No need for setting up new rules in security as the apps would run in-house only.
         * Cons
+            1. Installation requirements are necessary.
         * Comment
+            * The desktop application would be easier to use and will not need any hosting.
+* We decided to move forward with the cross-platform Desktop application.
+* We finalized the components of UI as follows-
+    1. Introduction screen - Users can upload the folder which contains the forms and select the form type (Form-1 or Form-2) and then submit them for the Form Recogniser API to work.
+    2. Select the out put folder to analyze.
+    3. As a Quality check and assurance, we have decided to add a fail-safe method. In this, a human can go through the `key-value` pairs that have been extracted from the forms and fix any minor issues. This increases the accuracy of the final result even more and is necessary as the details are related to finances and health and hence it is very sensitive.
+
+### Novelty in our solution
+* Proper image handling including de-skewing.
+* Added proper labels to detect the circled options.
+* Added proper labels to handle tick marks in **billing address** and **shipping address** issue.
+* A fast quality check format.
+* Cross-platform.
+* Handling of dates.
+* Handling of different file types like **jpg**, **jpeg**, **png** and **pdf**.
+
+## Tech Stack
+* We finalized the following tech stack after researching on various above-mentioned factors.
+* **Backend** - Python3
+* **UI** - ElectronJS, CSS, HTML
+* **Storage** - Google Cloud Storage
+* **OCR Service** - Microsoft Form Recogniser
+* **Version Control** - Git
+* **Package Manager** - NPM
+
 
 ## Initial steps
 1. Create an account on `Google Cloud`.
@@ -171,6 +206,7 @@ const bucketName = 'ENTER BUCKET NAME HERE';
 ```
 20. Once the keys are changed, new executables need to be generated again or build from the source for the code to work.
 21. The need for Azure storage blobs is just for training the model.
+22. Please refer to the `docs` folder for more information on usage.
 
 ## Starting the Project from The Source Code
 1. Install python and Pip  based on the platform - mac/linux/windows.
@@ -218,3 +254,18 @@ var pythonProcess = spawn('python3',[p, '-i', directory]);
 3. In command prompt change directory to package folder.
 4. Run `pip install -r requirment.txt`.
 5. Run `formocr` for UI.
+
+
+## Screenshots
+* This is how the UI looks when started initially. You can select the folder which has images in it. the image can be a jpg, fpeg, png and pdf. After that select form type.
+![Initial](outputs/1.png)
+* After completion and detection of all `key-value` pairs, this is how the output looks like. After this step, a folder will be formed by the name of **output** in the original folder which was given as input. Click on Quality Check after this step.
+![Output](outputs/2.png)
+* Select the output folder and click on submit. In the top right hand corner, the **Process Files** option is used to again go the first page.
+![Quality Check](outputs/3.png)
+![After Submit Button](outputs/4.png)
+* Check the files for their output for every `key-value` pair. **NOTE** - The `QC Status` tab will remain **incomplete** until you press the submit button. This is necessary even if no correction or editing has been made to the output of the API.
+![Analyze](outputs/5.png)
+![Submit Button](outputs/6.png)
+* After pressing on submit, the image file and the json file are uploaded to Google Cloud Storage and `QC status` is shown as completed.
+![QC completed](outputs/7.png) 
