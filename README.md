@@ -80,6 +80,7 @@ Our approach to the whole solution was based on proper research and tests.
             2. Highly scalable.
         * Cons
             1. Complex to setup.
+            2. Costlier than the other 2 services.
         * Comment
             * AWS S3 is highly scalable but a bit difficult to setup and is costlier than the other 2 options that are available.
     2. Microsoft Azure Storage
@@ -95,11 +96,11 @@ Our approach to the whole solution was based on proper research and tests.
             1. High uptime
             2. Cheaper than AWS S3. A same solution or plan as compared to AWS will cost you around 35% cheaper.
             3. Uploading files in Google Cloud Storage is 5 to 15 times faster than AWS S3.
-            4. Highly scalable.
+            4. Highly scalable. 
         * Cons
             1. A bit costlier than Microsoft Azure Storage.
         * Comment
-            * Cost analysis, uptime, speed and scalability made Google Cloud Storage the ideal candidate for storage of images and the output.
+            * Depending on region, the Google Cloud Storage can be faster or slower than the Microsoft Azure Storage. But the difference is small. So, the cost analysis, uptime, speed and scalability made Google Cloud Storage the ideal candidate for storage of images and the output. 
 * We went with Google Cloud Storage for the above-mentioned reasons.
 * We are storing the the modified images and saving the data of the form as a `JSON`. By modified, we mean aligned to a certain extent.
 * We chose `JSON` because of the fact that it can be accessed by an API for further analysis and is very easy to understand.
@@ -107,7 +108,16 @@ Our approach to the whole solution was based on proper research and tests.
 * We have the APIs and our custom code for the forms. Now we need a UI.
 ### User Interface
 * We wanted that the user interface should not have a steep learning curve and should be very easy to use.
-* For this, we 
+* For the User Interface, we wanted it to be **platform-independent** and fast to load.
+* We had 2 options. They are as follows-
+    1. Build a Web application
+        * Pros
+        * Cons
+        * Comment
+    2. Build a Desktop application
+        * Pros
+        * Cons
+        * Comment
 
 ## Initial steps
 1. Create an account on `Google Cloud`.
@@ -117,7 +127,22 @@ Our approach to the whole solution was based on proper research and tests.
 5. Search for Google Cloud Storage and enable it (By default, it should be enabled).
 6. Create a bucket as told [here](https://cloud.google.com/storage/docs/creating-buckets?authuser=1).
 7. Download the credentials json file as told [here](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
-8. Rename the `json` as `visionKey.json`.
+8. Rename the `json` as `visionKey.json`. It will look like this-
+```json
+{
+  "type": "<type>",
+  "project_id": "<project id>",
+  "private_key_id": "<private key id>",
+  "private_key": "<private key>",
+  "client_email": "<client email>",
+  "client_id": "<client id>",
+  "auth_uri": "<auth uri>",
+  "token_uri": "<tokrn url>",
+  "auth_provider_x509_cert_url": "<auth cert url>",
+  "client_x509_cert_url": "<cert url>"
+}
+
+```
 9. Get the name of the bucket previously created and put it in the `googleCloudStorage.js` file as shown below.
 ```javascript
 const bucketName = 'ENTER BUCKET NAME HERE';
