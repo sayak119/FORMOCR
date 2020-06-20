@@ -1,116 +1,150 @@
 <!DOCTYPE html>
 <html>
-<!DOCTYPE html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./bootstrap.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+	<link rel="stylesheet" href="./style.css" />
+	<link rel="stylesheet" href="./bootstrap.css" />
 	<title>Form Recognizer</title>
-  </head>
- <body>
-    	<div class="marginspace" style="padding-top: 30px;">
-    <p class="h1 marginspace " style="text-align: center;">Form Recognizer</p>
- 	</div>
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-   
-<!--    <script src="./index.js"></script> -->
-  </body>
+	<script src="./renderer.js"></script>
+	<script src="./googleCloudStorage.js"></script>
+</head>
+
 <body>
-	<div align="right"><BUTTON id="uploadImages" onClick="openUploadImage()" background-color="red" width="50px" class="btn btn-primary marginspace">&nbsp;Process Files&nbsp;</BUTTON></div>
-	<div class="marginspace" style="padding-top: 10px;">
-	<div align="centre" class="marginspace">
-		<!-- <BUTTON id="selectDirectory" onClick="selectDirectory()" background-color="red" width="50px" class="marginspace">&nbsp;Select Input Directory&nbsp;</BUTTON> -->
-		<div class="marginspace form-group">
-		<label><b>Input Directory Path : </b>&nbsp;</label>
-		<input id="selectedDirectory" class="form-control" type="textbox" width="80px" value=""/> 
-		</div>
-		<div>
-		<div style="padding-left:20px;">&nbsp;<b> OR </b>&nbsp;</div>
-		<input type="file" id="flup" onchange="setDirectoryPath(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple value="Choose Folder" class="btn btn-light"/>
-		<div align="center">
-		<BUTTON id="selectDirectory" onClick="selectDirectory()" background-color="red" width="50px" align="center" class="btn btn-info">&nbsp;Submit&nbsp;</BUTTON>
-		</div>
-		</div>
-	</div>
+	<div class="marginspace" style="padding-top: 30px;">
+		<p class="h1 marginspace " style="text-align: center;">Form Recognizer</p>
 	</div>
 
-	
-	<div id="dataTable" style="display:none; padding-top: 20px;">
-	<table width="100%" cellpadding = "5" cellspacing = "5" style="text-align: justify;">
-	<tr>
-		<th class="rowSelf column-left card-header">
-			All Forms
-		</th>
-		<th class="rowSelf column-centre card-header"> Selected Image	
-		</th>
-		<th class="rowSelf column-right card-header">
-			Output Json Data
-                </th>
-	</tr>
-	<tr class="rowSelf" height= "70%">
-	
-		<td class="column-left scrolling equalHeight">
-			<ul class="listStyle">
-			<div id="display-files">
-        		</div>
-        	</ul>
-		</td>
-		
-		<td class="column-centre equalHeight">
-			<div id="displaySelected">
-        		</div>
-		</td>
-		<td class="column-right equalHeight">
-			<div style="display: none" class="marginspace" id="QCdivShow"><Label><b>QC Status : &nbsp;</b></Label><div id="QCinfo" class="btn btn-outline-danger"></div></div>
-			<form id="jsonData">
-			<div id="displayJson">
+	<div id="page1">
+		<div align="right"><BUTTON id="qc" onClick="openQC()" background-color="red" width="50px"
+				class="btn btn-primary marginspace">&nbsp;Quality Check&nbsp;</BUTTON></div>
+		<table width="95%" align="centre" class="marginspace" cellpadding="5" cellspacing="5"
+			style="text-align: justify;float: right;">
+			<tr>
+				<th>
 
-			   <!-- <div><label></label>>
-				<input type="textbox"/>
-				</div> -->
-			</div>
-			</form>
-			<input type="hidden" id="imageFilePath" value="">
-			<input type="hidden" id="JsonFilePath" value="">
-			<div style="align-items: center;">
-				<button id="submitButton" onClick="saveQCJson('QCComplete-UploadPending', 1)" style="display:none;" class="submitButton btn btn-info"><b>Submit Data</b></button>
-			</div>
-	<!--	</form> -->
-		</td>
-	</tr>
-	</table>
-</div>
-	
+				</th>
+				<th class="rowSelf">
+					Output from Console
+				</th>
+			</tr>
+			<tr class="rowSelf" height="600px">
+				<td>
+					<div>
+						<Form enctype="multipart/form-data">
+							<div class="marginspace inputLabel">
+								<div><label for="inputImage"><b>
+											Choose file to Upload :</b>
+									</label>
+								</div>
+								<div>
+									<input type="file" id="inputImage" onchange="setUploadedDirectoryPath(event)"
+										webkitdirectory mozdirectory msdirectory odirectory directory multiple
+										class="btn btn-light" value="Choose Folder" />
 
-<!--
-      <div class="row column-left scrolling colrBack" >
-        <h2>All Forms</h2>
-	<div id="display-files">
-      	</div>
-      </div>
-      <div class="row column-centre">
-        <h2>Selected Image</h2>
-        <div id="displaySelected">
-        </div>
-      </div>
-      <div class="row column-right">
-        <h2>Json Data</h2>
-        <p>Some text..</p>
-      </div>
--->
+								</div>
+							</div>
+							<div class="marginspace form-group">
+								<div>
+									<label><b>
+											Select Form Type
+										</b></label>
+								</div>
+								<div>
+									<select id="FormType" class="form-control">
+										<option value="form1">Form1</option>
+										<option value="form2">Form2</option>
+									</select>
+									<input type="hidden" id="directoryFilePath" value="">
+								</div>
+							</div>
+						</Form>
+					</div>
+					<div class="marginspace"><button class="btn btn-info" onClick="runPython()">Submit</button></div>
+				</td>
+				<td width="80%" style="background-color:black;">
+					<div id="consoleOutput"
+						style="overflow-y: scroll; scroll-behavior: auto;color:white; max-height: 600px;"></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="page2" style="display: none;">
+		<div align="right"><BUTTON id="uploadImages" onClick="openUploadImage()" background-color="red" width="50px"
+				class="btn btn-primary marginspace">&nbsp;Process Files&nbsp;</BUTTON></div>
+		<div class="marginspace" style="padding-top: 10px;">
+			<div align="centre" class="marginspace">
+				<!-- <BUTTON id="selectDirectory" onClick="selectDirectory()" background-color="red" width="50px" class="marginspace">&nbsp;Select Input Directory&nbsp;</BUTTON> -->
+				<div class="marginspace form-group">
+					<label><b>Input Directory Path : </b>&nbsp;</label>
+					<input id="selectedDirectory" class="form-control" type="textbox" width="80px" value="" />
+				</div>
+				<div>
+					<div style="padding-left:20px;">&nbsp;<b> OR </b>&nbsp;</div>
+					<input type="file" id="flup" onchange="setDirectoryPath(event)" webkitdirectory mozdirectory
+						msdirectory odirectory directory multiple value="Choose Folder" class="btn btn-light" />
+					<div align="center">
+						<BUTTON id="selectDirectory" onClick="selectDirectory()" background-color="red" width="50px"
+							align="center" class="btn btn-info">&nbsp;Submit&nbsp;</BUTTON>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="dataTable" style="display:none; padding-top: 20px;">
+			<table width="100%" cellpadding="5" cellspacing="5" style="text-align: justify;">
+				<tr>
+					<th class="rowSelf column-left card-header">
+						All Forms
+					</th>
+					<th class="rowSelf column-centre card-header"> Selected Image
+					</th>
+					<th class="rowSelf column-right card-header">
+						Output Json Data
+					</th>
+				</tr>
+				<tr class="rowSelf" height="70%">
+
+					<td class="column-left scrolling equalHeight">
+						<ul class="listStyle">
+							<div id="display-files">
+							</div>
+						</ul>
+					</td>
+
+					<td class="column-centre equalHeight">
+						<div id="displaySelected">
+						</div>
+					</td>
+					<td class="column-right equalHeight">
+						<div style="display: none" class="marginspace" id="QCdivShow"><Label><b>QC Status :
+									&nbsp;</b></Label>
+							<div id="QCinfo" class="btn btn-outline-danger"></div>
+						</div>
+						<form id="jsonData">
+							<div id="displayJson">
+							</div>
+						</form>
+						<input type="hidden" id="imageFilePath" value="">
+						<input type="hidden" id="JsonFilePath" value="">
+						<div style="align-items: center;">
+							<button id="submitButton" onClick="saveQCJson('QCComplete-UploadPending', 1)"
+								style="display:none;" class="submitButton btn btn-info"><b>Submit Data</b></button>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
 	<!-- Insert this line above script imports  -->
-   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+	<script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 	<!-- normal script imports etc  -->
- 
+
 	<!-- Insert this line after script imports -->
 	<script>if (window.module) module = window.module;</script>
-	<script type="text/javascript">
-   
-  // 	readGivenDirectory();
-	</script>
-	<script src="./googleCloudStorage.js"></script>
-</body> 
+	<script type="text/javascript"></script>
+</body>
+
 </html>
