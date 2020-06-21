@@ -239,21 +239,21 @@ var pythonProcess = spawn('python3',[p, '-i', directory]);
 2. After installation test command `python` and `pip` by in command prompt.
 3. In command prompt change directory to package folder.
 4. Run `pip install -r requirment.txt`.
-5. Run `./formocr` for UI.
+5. Run `./FORMOCR` for UI.
 
 ## For Windows Setup
 1. Install python from given link. `https://www.python.org/downloads/`.
 2. Make sure to select checkbox of `pip` and `Set Environment Variable`.
 3. After installation test command `python` and `pip` by in command prompt.
 4. Run `pip install -r requirment.txt`.
-5. Run `formocr.exe` for UI.
+5. Run `form-recognizer.exe` for UI.
 
 ## For macOS Setup 
 1. Install python  and pip using the link : `https://docs.python-guide.org/starting/install3/osx/`.
 2. After installation test command `python` and `pip` by in command prompt.
 3. In command prompt change directory to package folder.
 4. Run `pip install -r requirment.txt`.
-5. Run `formocr` for UI.
+5. Run `FORMOCR` for UI.
 
 
 ## Screenshots
